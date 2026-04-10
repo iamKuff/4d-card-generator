@@ -1,9 +1,15 @@
-Add screenshots here for the main README (flat preview, layered viewer, folder listing).
+README hero images live here (`preview_flat.png`, `viewer_parallax.png`, `output_folder.png`).
 
-Suggested filenames:
+Regenerate:
 
-- `preview_flat.png` — `preview_composite.png` export
-- `viewer_parallax.png` — browser capture with depth
-- `output_folder.png` — file tree or Explorer screenshot
+```bash
+pip install -r requirements.txt
+python scripts/generate_readme_assets.py
+```
 
-Keep images reasonably small (under ~1.5 MB each) for a snappy GitHub README.
+Replace with real OpenAI pipeline output + layer stack still:
+
+```bash
+# OPENAI_API_KEY in env, or put it in .env at repo root
+python scripts/generate_readme_assets.py --from-pipeline
+```

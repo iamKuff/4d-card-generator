@@ -11,16 +11,18 @@ This is **not** a “single flat trading card JPEG” tool. The real product is 
 > The **4D** feel comes from **multiple transparent layers moving at different depths**, not from one baked composite.
 
 <p align="center">
-  <img src="https://placehold.co/360x540/0f1020/e8e8ff?text=Flat+preview%0A%28preview_composite.png%29" alt="Placeholder: flat preview composite" width="42%" />
+  <img src="assets/repo_preview_images/preview_flat.png" alt="Flat preview composite from the pipeline" width="42%" />
   &nbsp;
-  <img src="https://placehold.co/360x540/120a28/e8e8ff?text=Layered+viewer%0A%28parallax%29" alt="Placeholder: layered viewer screenshot" width="42%" />
+  <img src="assets/repo_preview_images/viewer_parallax.png" alt="Layer stack / parallax concept" width="42%" />
 </p>
 
 <p align="center">
-  <img src="https://placehold.co/640x200/1a1a24/cccccc?text=output_card%2F+folder+layout+%28see+examples%2Fsample_output%29" alt="Placeholder: output folder layout" width="88%" />
+  <img src="assets/repo_preview_images/output_folder.png" alt="Example output_card folder layout" width="88%" />
 </p>
 
-Swap the placeholders above for your own captures under `assets/repo_preview_images/` when you publish.
+**Refresh these images:** with `OPENAI_API_KEY` set (or a project-root `.env` loaded by `python-dotenv`), run  
+`python scripts/generate_readme_assets.py --from-pipeline`  
+to regenerate assets from a real pipeline run. Without an API key, `python scripts/generate_readme_assets.py` writes deterministic Pillow marketing stills into the same folder.
 
 ---
 

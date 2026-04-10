@@ -59,6 +59,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def main(argv: list[str] | None = None) -> int:
+    try:
+        from dotenv import load_dotenv
+
+        load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+    except ImportError:
+        pass
+
     args = parse_args(argv)
     root = Path(__file__).resolve().parents[2]
 

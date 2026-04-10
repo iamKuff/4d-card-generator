@@ -13,6 +13,7 @@ authors = [{ name = "4D Card Generator contributors" }]
 dependencies = [
   "openai>=1.40.0",
   "pillow>=10.0.0",
+  "python-dotenv>=1.0.0",
 ]
 
 [project.optional-dependencies]
