@@ -10,7 +10,7 @@ Generate a **layered anime-style card** as separate PNGs (background, holo, FX, 
 
 <p align="center">
   <a href="https://iamkuff.github.io/4d-card-generator/">
-    <img src="assets/repo_preview_images/hero_showcase.png" alt="Card showcase" width="720" />
+    <img src="assets/repo_preview_images/hero_showcase.png" alt="Card showcase" width="360" />
   </a>
 </p>
 
