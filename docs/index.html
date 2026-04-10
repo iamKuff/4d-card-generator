@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="4D Card Generator — layered PNG collectible cards with browser parallax. Live Astra Vey demo." />
+  <title>4D Card Generator — Live demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg0: #070814;
+      --bg1: #12102a;
+      --accent: #a78bfa;
+      --accent2: #38bdf8;
+      --text: #f4f4ff;
+      --muted: rgba(228, 231, 255, 0.72);
+      --card: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.1);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "DM Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(120, 80, 220, 0.35), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 100% 50%, rgba(56, 189, 248, 0.12), transparent 50%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .badge {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: rgba(56, 189, 248, 0.06);
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.75rem;
+      background: linear-gradient(120deg, #fff 0%, #c4b5fd 45%, #7dd3fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 1.75rem;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    a.btn:hover { transform: translateY(-1px); }
+    a.btn-primary {
+      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(124, 58, 237, 0.35);
+    }
+    a.btn-secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 1fr 1.15fr; align-items: start; }
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .panel h2 {
+      font-size: 1.1rem;
+      margin: 0;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .shot {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .panel-body { padding: 1rem 1.25rem 1.25rem; font-size: 0.95rem; color: var(--muted); }
+    .panel-body strong { color: var(--text); }
+    .viewer-frame {
+      min-height: 520px;
+      border: none;
+      width: 100%;
+      display: block;
+      background: #0b0d18;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.75rem 1.25rem 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .mono { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; }
+    footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent2); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">Layered PNGs · Parallax viewer</div>
+      <h1>4D Card Generator</h1>
+      <p class="lead">
+        A real pipeline run is baked into this site: <strong>Astra Vey — Prismatic Duelist</strong>.
+        Open the interactive viewer — each image is a separate layer with depth, not one flat bake.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="./demo/viewer.html">Open interactive viewer</a>
+        <a class="btn btn-secondary" href="https://github.com/iamKuff/4d-card-generator">View on GitHub</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>Flat preview (inspection only)</h2>
+        <img class="shot" src="./demo/preview_composite.png" alt="Astra Vey card flat preview composite" width="1024" height="1536" loading="lazy" />
+        <div class="panel-body">
+          <strong>preview_composite.png</strong> is one quick stack for checking composition.
+          The 4D effect uses individual PNGs in the viewer — never this single file for parallax.
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Interactive layered viewer</h2>
+        <iframe class="viewer-frame" title="4D card parallax viewer" src="./demo/viewer.html" loading="lazy"></iframe>
+        <p class="note">
+          Move your pointer over the card. If the iframe feels cramped on mobile,
+          use <a href="./demo/viewer.html" style="color: var(--accent2);">full-page viewer</a>.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        <span class="mono">docs/demo/</span> mirrors a full <span class="mono">output_card/</span> run, hosted for GitHub Pages.
+      </p>
+      <p style="margin-top: 0.5rem;">
+        MIT · <a href="https://github.com/iamKuff/4d-card-generator#readme">README &amp; setup</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

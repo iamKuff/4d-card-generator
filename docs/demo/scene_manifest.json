@@ -1,0 +1,24 @@
+{
+  "stack": [
+    "background",
+    "holo_overlay",
+    "fx_back",
+    "player",
+    "fx_front",
+    "ui_overlay",
+    "gloss_overlay"
+  ],
+  "depths": {
+    "background": -18,
+    "holo": -8,
+    "fx_back": 0,
+    "player": 10,
+    "fx_front": 16,
+    "ui": 22,
+    "shine": 26
+  },
+  "canvas_size": [
+    1024,
+    1536
+  ]
+}

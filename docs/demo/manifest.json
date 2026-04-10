@@ -1,0 +1,44 @@
+{
+  "project_dir": "D:\\4d-cards\\output_card",
+  "models": {
+    "text_model": "gpt-5.4",
+    "image_model": "gpt-image-1.5"
+  },
+  "layers": {
+    "character_reference": "character_reference.png",
+    "background": "background.png",
+    "player": "player.png",
+    "fx_back": "fx_back.png",
+    "fx_front": "fx_front.png",
+    "ui_overlay": "ui_overlay.png",
+    "holo_overlay": "holo_overlay.png",
+    "gloss_overlay": "gloss_overlay.png",
+    "preview": "preview_composite.png",
+    "viewer": "viewer.html",
+    "style_bible": "style_bible.json"
+  },
+  "recommended_stack": [
+    "background",
+    "holo_overlay",
+    "fx_back",
+    "player",
+    "fx_front",
+    "ui_overlay",
+    "gloss_overlay"
+  ],
+  "viewer_depths": {
+    "background": -18,
+    "holo": -8,
+    "fx_back": 0,
+    "player": 10,
+    "fx_front": 16,
+    "ui": 22,
+    "shine": 26
+  },
+  "notes": [
+    "Use individual PNG layers in the viewer, not preview_composite.png.",
+    "gpt-image-1.5 is OpenAI's documented highest-quality GPT Image model as of now.",
+    "The preview image is only for checking composition quickly.",
+    "If you want even tighter character consistency across a whole series, keep and reuse character_reference.png when you evolve the pipeline further."
+  ]
+}

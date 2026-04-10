@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4D Card Viewer</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 50% 35%, #18204a 0%, #0b0d18 45%, #04050b 100%);
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .scene { perspective: 1400px; width: min(78vw, 500px); }
+    .card-wrap { position: relative; width: 100%; aspect-ratio: 2 / 3; transform-style: preserve-3d; }
+    .card { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+    .layer {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+      pointer-events: none; user-select: none; transform-style: preserve-3d; will-change: transform, opacity;
+    }
+    .shadow { position: absolute; left: 10%; right: 10%; bottom: -4%; height: 9%; border-radius: 50%; background: rgba(0,0,0,0.5); filter: blur(25px); transform: translateZ(-30px); pointer-events: none; }
+    .glow { position: absolute; inset: -8%; background: radial-gradient(circle, rgba(130,150,255,0.16), rgba(130,150,255,0) 60%); filter: blur(30px); transform: translateZ(-24px); pointer-events: none; }
+    .bg { transform: translateZ(-18px) scale(1.01); }
+    .holo { transform: translateZ(-8px) scale(1.005); mix-blend-mode: screen; opacity: 0.34; }
+    .fx-back { transform: translateZ(0px) scale(1.005); mix-blend-mode: screen; opacity: 0.18; }
+    .player { transform: translateZ(10px) scale(1.008); }
+    .fx-front { transform: translateZ(16px) scale(1.01); mix-blend-mode: screen; opacity: 0.42; }
+    .ui { transform: translateZ(22px); opacity: 0.98; }
+    .gloss { transform: translateZ(24px); mix-blend-mode: screen; opacity: 0.65; }
+    .shine { position: absolute; inset: 0; transform: translateZ(26px); pointer-events: none; border-radius: 18px; mix-blend-mode: screen; opacity: 0.75; }
+    .hint { position: fixed; bottom: 16px; color: rgba(255,255,255,0.72); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="scene" id="scene">
+    <div class="card-wrap">
+      <div class="shadow"></div>
+      <div class="glow"></div>
+      <div class="card" id="card">
+        <img class="layer bg" src="background.png" alt="">
+        <img class="layer holo" src="holo_overlay.png" alt="">
+        <img class="layer fx-back" src="fx_back.png" alt="">
+        <img class="layer player" src="player.png" alt="">
+        <img class="layer fx-front" src="fx_front.png" alt="">
+        <img class="layer ui" src="ui_overlay.png" alt="">
+        <img class="layer gloss" src="gloss_overlay.png" alt="">
+        <div class="shine" id="shine"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hint">Move mouse for subtle layered depth</div>
+  <script>
+    const scene = document.getElementById("scene");
+    const card = document.getElementById("card");
+    const shine = document.getElementById("shine");
+    const bg = document.querySelector(".bg");
+    const holo = document.querySelector(".holo");
+    const fxBack = document.querySelector(".fx-back");
+    const player = document.querySelector(".player");
+    const fxFront = document.querySelector(".fx-front");
+    const ui = document.querySelector(".ui");
+    const gloss = document.querySelector(".gloss");
+
+    let targetRX = 0, targetRY = 0, currentRX = 0, currentRY = 0;
+    let targetPX = 0, targetPY = 0, currentPX = 0, currentPY = 0;
+
+    function handleMove(clientX, clientY) {
+      const rect = scene.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width;
+      const y = (clientY - rect.top) / rect.height;
+      const nx = (x - 0.5) * 2;
+      const ny = (y - 0.5) * 2;
+      targetRY = nx * 10;
+      targetRX = -ny * 10;
+      targetPX = nx;
+      targetPY = ny;
+      const shineX = 50 + nx * 20;
+      const shineY = 50 + ny * 20;
+      shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.08) 14%, rgba(255,255,255,0.02) 26%, rgba(255,255,255,0.00) 44%)`;
+    }
+
+    window.addEventListener("mousemove", (e) => handleMove(e.clientX, e.clientY));
+    window.addEventListener("touchmove", (e) => { const t = e.touches[0]; if (t) handleMove(t.clientX, t.clientY); }, { passive: true });
+
+    function animate() {
+      currentRX += (targetRX - currentRX) * 0.08;
+      currentRY += (targetRY - currentRY) * 0.08;
+      currentPX += (targetPX - currentPX) * 0.08;
+      currentPY += (targetPY - currentPY) * 0.08;
+      card.style.transform = `rotateX(${currentRX}deg) rotateY(${currentRY}deg)`;
+      bg.style.transform = `translateZ(-18px) scale(1.01) translate(${currentPX * -2}px, ${currentPY * -2}px)`;
+      holo.style.transform = `translateZ(-8px) scale(1.005) translate(${currentPX * -1}px, ${currentPY * -1}px)`;
+      fxBack.style.transform = `translateZ(0px) scale(1.005) translate(${currentPX * 1.5}px, ${currentPY * 1.5}px)`;
+      player.style.transform = `translateZ(10px) scale(1.008) translate(${currentPX * 3}px, ${currentPY * 3}px)`;
+      fxFront.style.transform = `translateZ(16px) scale(1.01) translate(${currentPX * 4}px, ${currentPY * 4}px)`;
+      ui.style.transform = `translateZ(22px) translate(${currentPX * 1}px, ${currentPY * 1}px)`;
+      gloss.style.transform = `translateZ(24px) translate(${currentPX * 0.8}px, ${currentPY * 0.8}px)`;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

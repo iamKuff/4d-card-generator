@@ -2,32 +2,41 @@
 
 ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
+[![Live demo — GitHub Pages](https://img.shields.io/badge/demo-live-22c55e?style=flat-square)](https://iamkuff.github.io/4d-card-generator/)
 ![Status: Active](https://img.shields.io/badge/status-active-7c3aed)
 
-**Generate a collectible-style anime player card as separate PNG layers**, then drop them into the included **browser viewer** where each plane sits at its own Z depth and responds to pointer movement with **subtle, premium parallax**.
+**Try the real layered viewer (hosted): [iamkuff.github.io/4d-card-generator](https://iamkuff.github.io/4d-card-generator/)** — move your pointer; each PNG is its own depth plane (not a single flat render).
 
-This is **not** a “single flat trading card JPEG” tool. The real product is **layered artwork** you can reuse in the web, **Three.js**, or a game engine.
+**Generate a collectible-style anime player card as separate PNG layers**, then open the **browser viewer** where each plane sits at its own Z depth with **subtle parallax**.
 
-> The **4D** feel comes from **multiple transparent layers moving at different depths**, not from one baked composite.
+This is **not** a “one JPEG trading card” tool. The product is **layered artwork** for the web, **Three.js**, or engines.
+
+> The **4D** feel comes from **multiple layers moving at different depths**, not from `preview_composite.png` alone.
+
+### Showcase — Astra Vey (*Prismatic Duelist*)
+
+The repo includes a **full sample build** under [`docs/demo/`](docs/demo/) (same layout as a local `output_card/` run): layers, `viewer.html`, manifests, and the flat composite below. That folder powers **GitHub Pages** so visitors can try the card in the browser without cloning.
 
 <p align="center">
-  <img src="assets/repo_preview_images/preview_flat.png" alt="Flat preview composite from the pipeline" width="42%" />
+  <a href="https://iamkuff.github.io/4d-card-generator/">
+    <img src="docs/demo/preview_composite.png" alt="Astra Vey — Prismatic Duelist sample card (flat preview composite)" width="420" />
+  </a>
+</p>
+<p align="center"><em>Flat <code>preview_composite.png</code> — click to open the live site with the interactive layered viewer.</em></p>
+
+<p align="center">
+  <img src="assets/repo_preview_images/viewer_parallax.png" alt="Layer stack diagram" width="38%" />
   &nbsp;
-  <img src="assets/repo_preview_images/viewer_parallax.png" alt="Layer stack / parallax concept" width="42%" />
+  <img src="assets/repo_preview_images/output_folder.png" alt="Example output folder layout" width="56%" />
 </p>
 
-<p align="center">
-  <img src="assets/repo_preview_images/output_folder.png" alt="Example output_card folder layout" width="88%" />
-</p>
-
-**Refresh these images:** with `OPENAI_API_KEY` set (or a project-root `.env` loaded by `python-dotenv`), run  
-`python scripts/generate_readme_assets.py --from-pipeline`  
-to regenerate assets from a real pipeline run. Without an API key, `python scripts/generate_readme_assets.py` writes deterministic Pillow marketing stills into the same folder.
+**Optional README art:** drop a browser or desktop capture (e.g. the angled card shot) at `assets/repo_preview_images/hero_showcase.png` and reference it in a PR — or run `python scripts/generate_readme_assets.py` / `--from-pipeline` to refresh marketing stills. Local pipeline output still lands in **`output_card/`** (gitignored); copy into `docs/demo/` when you want to **update the public demo**.
 
 ---
 
 ## Features
 
+- **Live demo on GitHub Pages** — [`docs/demo/`](docs/demo/) hosts a complete sample card + `viewer.html`; see [GitHub Pages setup](#github-pages-hosting-the-demo).
 - **Layered PNG export** — background, holo, back FX, player, front FX, UI, gloss (plus character reference and a flat preview).
 - **Transparent player / FX** — designed for compositing and engines.
 - **Deterministic overlays** — UI, holographic foil, and gloss are rendered locally with Pillow for clean type and repeatable chrome.
@@ -91,6 +100,19 @@ The viewer keeps spacing **controlled** so the player has depth but does not “
 9. **Manifests** — documents outputs and the recommended stack.
 
 Identity consistency across **separate** image generations is **best-effort**. This pipeline improves it with a style bible + character reference + shared anchors; deterministic UI/holo/gloss avoids noisy text from the model.
+
+---
+
+## GitHub Pages (hosting the demo)
+
+The site at **https://iamkuff.github.io/4d-card-generator/** is served from this repo’s **`docs/`** folder (`index.html` + [`docs/demo/`](docs/demo/) assets).
+
+1. In the GitHub repo: **Settings → Pages**.
+2. **Build and deployment → Source:** *Deploy from a branch*.
+3. **Branch:** `main`, folder **`/docs`**, then Save.
+4. After a minute, the live URL works (replace `iamKuff` / `4d-card-generator` if you fork).
+
+To **update the hosted card**, copy a fresh `output_card/*` into `docs/demo/`, commit, and push.
 
 ---
 
