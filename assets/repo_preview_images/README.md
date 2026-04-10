@@ -1,6 +1,8 @@
 README images live here (`preview_flat.png`, `viewer_parallax.png`, `output_folder.png`).
 
-**Optional:** add `hero_showcase.png` (browser or angled desktop shot of the live site) for the main README — the primary showcase is now the real card under `docs/demo/` and the [live demo](https://iamkuff.github.io/4d-card-generator/).
+**`hero_showcase.png`** — README hero image (browser / angled desktop shot of the live site). Replace the committed file anytime; the README references it by path.
+
+The primary interactive showcase is still the [live demo](https://iamkuff.github.io/4d-card-generator/) and [`docs/demo/`](../docs/demo/).
 
 Regenerate:
 

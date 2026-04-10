@@ -25,12 +25,17 @@ The repo includes a **full sample build** under [`docs/demo/`](docs/demo/) (same
 <p align="center"><em>Flat <code>preview_composite.png</code> — click to open the live site with the interactive layered viewer.</em></p>
 
 <p align="center">
+  <img src="assets/repo_preview_images/hero_showcase.png" alt="4D card — live site / browser screenshot (replace with your capture)" width="720" />
+</p>
+<p align="center"><em>Hero screenshot slot — overwrite <code>assets/repo_preview_images/hero_showcase.png</code> with your angled browser or desktop capture when ready.</em></p>
+
+<p align="center">
   <img src="assets/repo_preview_images/viewer_parallax.png" alt="Layer stack diagram" width="38%" />
   &nbsp;
   <img src="assets/repo_preview_images/output_folder.png" alt="Example output folder layout" width="56%" />
 </p>
 
-**Optional README art:** drop a browser or desktop capture (e.g. the angled card shot) at `assets/repo_preview_images/hero_showcase.png` and reference it in a PR — or run `python scripts/generate_readme_assets.py` / `--from-pipeline` to refresh marketing stills. Local pipeline output still lands in **`output_card/`** (gitignored); copy into `docs/demo/` when you want to **update the public demo**.
+**Refresh marketing stills:** run `python scripts/generate_readme_assets.py` or `--from-pipeline` (with `OPENAI_API_KEY`). Local pipeline output still lands in **`output_card/`** (gitignored); copy into **`docs/demo/`** when you want to **update the public demo**.
 
 ---
 
