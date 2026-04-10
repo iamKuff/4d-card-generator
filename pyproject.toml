@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fourd-card-generator"
+version = "0.1.0"
+description = "Layered 4D anime-style player cards: OpenAI image layers + deterministic overlays + parallax viewer."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "4D Card Generator contributors" }]
+dependencies = [
+  "openai>=1.40.0",
+  "pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.6.0"]
+
+[project.scripts]
+generate-card = "fourd_card.cli:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fourd_card = []
