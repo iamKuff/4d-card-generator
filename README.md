@@ -17,17 +17,21 @@ This is **not** a “one JPEG trading card” tool. The product is **layered art
 
 The repo includes a **full sample build** under [`docs/demo/`](docs/demo/) (same layout as a local `output_card/` run): layers, `viewer.html`, manifests, and the flat composite below. That folder powers **GitHub Pages** so visitors can try the card in the browser without cloning.
 
-<p align="center">
-  <a href="https://iamkuff.github.io/4d-card-generator/">
-    <img src="docs/demo/preview_composite.png" alt="Astra Vey — Prismatic Duelist sample card (flat preview composite)" width="420" />
-  </a>
-</p>
-<p align="center"><em>Flat <code>preview_composite.png</code> — click to open the live site with the interactive layered viewer.</em></p>
+**Featured preview** (committed image: [`assets/repo_preview_images/hero_showcase.png`](assets/repo_preview_images/hero_showcase.png)):
 
 <p align="center">
-  <img src="assets/repo_preview_images/hero_showcase.png" alt="4D card — live site / browser screenshot (replace with your capture)" width="720" />
+  <a href="https://iamkuff.github.io/4d-card-generator/" title="Open live demo">
+    <img src="assets/repo_preview_images/hero_showcase.png" alt="Astra Vey — 4D layered card showcase" width="720" />
+  </a>
 </p>
-<p align="center"><em>Hero screenshot slot — overwrite <code>assets/repo_preview_images/hero_showcase.png</code> with your angled browser or desktop capture when ready.</em></p>
+<p align="center"><em>Click the image to open the <strong>live layered viewer</strong> on GitHub Pages.</em></p>
+
+<p align="center">
+  <a href="https://iamkuff.github.io/4d-card-generator/">
+    <img src="docs/demo/preview_composite.png" alt="Flat preview composite (docs/demo) for comparison" width="380" />
+  </a>
+</p>
+<p align="center"><em>Flat <code>docs/demo/preview_composite.png</code> — quick composition check; parallax uses separate PNG layers in the viewer.</em></p>
 
 <p align="center">
   <img src="assets/repo_preview_images/viewer_parallax.png" alt="Layer stack diagram" width="38%" />
